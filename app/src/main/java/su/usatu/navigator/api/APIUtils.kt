@@ -1,12 +1,16 @@
 package ru.followy.util.followy_extensions.api
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import okhttp3.FormBody
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
+import java.net.URL
 import java.util.concurrent.TimeUnit
+
 
 class APIUtils {
     companion object {
@@ -99,6 +103,17 @@ class APIUtils {
             return USATUNavigatorResponse(code, body!!)
         }
 
+        /**
+         * This is a method to download image by name
+         * @param imageFileName = image file name on server
+         * @return Bitmap of the requested image
+         */
+        internal fun downloadImage(imageFileName: String): Bitmap? {
+            val url = URL(("${APIConfig.urlImage}$imageFileName"))
+            println(url.toString())
+            return BitmapFactory.decodeStream(url.openConnection().getInputStream())
+        }
+
         private fun jsonToRequestBody(jsonObject: JSONObject) =
             "$jsonObject".toRequestBody("application/json; charset=utf-8".toMediaType())
 
@@ -124,12 +139,12 @@ class APIUtils {
                 JSON ->
                     if (auth == null)
                         return Request.Builder()
-                            .url("${APIConfig.url}$url")
+                            .url("${APIConfig.urlAPI}$url")
                             .post(jsonToRequestBody(jsonObject))
                             .build()
                     else
                         return Request.Builder()
-                            .url("${APIConfig.url}$url")
+                            .url("${APIConfig.urlAPI}$url")
                             .addHeader("Authorization", "Bearer $auth")
                             .post(jsonToRequestBody(jsonObject))
                             .build()
@@ -137,13 +152,13 @@ class APIUtils {
                 URL_ENCODED -> {
                     if (auth == null)
                         return Request.Builder()
-                            .url("${APIConfig.url}$url")
+                            .url("${APIConfig.urlAPI}$url")
                             .header("Content-Type", "application/x-www-form-urlencoded")
                             .post(jsonToFormRequestBody(jsonObject))
                             .build()
                     else
                         return Request.Builder()
-                            .url("${APIConfig.url}$url")
+                            .url("${APIConfig.urlAPI}$url")
                             .header("Content-Type", "application/x-www-form-urlencoded")
                             .addHeader("Authorization", "Bearer $auth")
                             .post(jsonToFormRequestBody(jsonObject))
@@ -157,21 +172,21 @@ class APIUtils {
         private fun prepareGetRequest(url: String, auth: String?) =
             if (auth != null)
                 Request.Builder()
-                    .url("${APIConfig.url}$url")
+                    .url("${APIConfig.urlAPI}$url")
                     .addHeader("Authorization", "Bearer $auth")
                     .addHeader("charset", "utf-8")
                     .get()
                     .build()
             else
                 Request.Builder()
-                    .url("${APIConfig.url}$url")
+                    .url("${APIConfig.urlAPI}$url")
                     .addHeader("charset", "utf-8")
                     .get()
                     .build()
 
         private fun prepareDeleteRequest(url: String, auth: String) =
             Request.Builder()
-                .url("${APIConfig.url}$url")
+                .url("${APIConfig.urlAPI}$url")
                 .addHeader("Authorization", "Bearer $auth")
                 .addHeader("charset", "utf-8")
                 .delete()
@@ -179,7 +194,7 @@ class APIUtils {
 
         private fun preparePutRequest(url: String, jsonObject: JSONObject, auth: String) =
             Request.Builder()
-                .url("${APIConfig.url}$url")
+                .url("${APIConfig.urlAPI}$url")
                 .addHeader("Authorization", "Bearer $auth")
                 .put(jsonToRequestBody(jsonObject))
                 .build()
