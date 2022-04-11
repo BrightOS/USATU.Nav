@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/update"
+        android:icon="@drawable/ic_refresh"
+        android:title="Обновить списки выбора" />
+    <item
+        android:id="@+id/clear_history"
+        android:icon="@drawable/ic_history"
+        android:title="Очистить историю поиска" />
+</menu>
