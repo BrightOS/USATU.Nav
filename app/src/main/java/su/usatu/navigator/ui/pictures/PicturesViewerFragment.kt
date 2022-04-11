@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.transition.MaterialSharedAxis
@@ -58,6 +59,10 @@ class PicturesViewerFragment : Fragment() {
                 context,
                 args.pictures.toList()
             )
+
+        binding.back.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         binding.fromText.text = args.from
         binding.toText.text = args.to
