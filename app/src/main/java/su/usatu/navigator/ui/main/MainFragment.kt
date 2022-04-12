@@ -125,20 +125,22 @@ class MainFragment : Fragment() {
 
                 popup.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
                     override fun onMenuItemClick(item: MenuItem): Boolean {
-                        when (item.itemId) {
+                        return when (item.itemId) {
                             R.id.clear_history -> {
                                 mainViewModel.deleteAllHistory()
+                                true
                             }
                             R.id.update -> {
                                 mainViewModel.updatePointsList()
+                                true
                             }
+                            else ->
+                                false
                         }
-                        return true
                     }
                 })
-
+                popup.setForceShowIcon(true)
                 popup.show()
-
             }
 
             binding.ndaAppbar.setStartButtonOnClickListener {
