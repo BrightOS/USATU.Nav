@@ -68,6 +68,20 @@ class PicturesViewerFragment : Fragment() {
         binding.toText.text = args.to
         binding.viewPager.adapter = viewPagerAdapter
         binding.viewPager.addOnPageChangeListener(onPageChangeListener)
+
+        binding.leftClick.setOnClickListener {
+            binding.viewPager.currentItem.let {
+                if (it > 0)
+                    binding.viewPager.currentItem = it - 1
+            }
+        }
+
+        binding.rightClick.setOnClickListener {
+            binding.viewPager.currentItem.let {
+                if (it < args.pictures.size - 1)
+                    binding.viewPager.currentItem = it + 1
+            }
+        }
     }
 
     override fun onDestroy() {
