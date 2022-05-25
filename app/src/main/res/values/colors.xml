@@ -1,7 +1,8 @@
 <resources>
 
-    <color name="splashColor">#171626</color>
+    <color name="splashColor">#f6f5ff</color>
     <color name="holder">#1a1a12</color>
+    <color name="splash_icon_background">#e7e7e7</color>
 
     <color name="md_theme_light_primary">#0062A2</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>

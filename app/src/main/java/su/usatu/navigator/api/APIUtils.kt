@@ -110,7 +110,6 @@ class APIUtils {
          */
         internal fun downloadImage(imageFileName: String): Bitmap? {
             val url = URL(("${APIConfig.urlImage}$imageFileName"))
-            println(url.toString())
             return BitmapFactory.decodeStream(url.openConnection().getInputStream())
         }
 
@@ -140,11 +139,13 @@ class APIUtils {
                     if (auth == null)
                         return Request.Builder()
                             .url("${APIConfig.urlAPI}$url")
+                            .header("apikey", "123456789")
                             .post(jsonToRequestBody(jsonObject))
                             .build()
                     else
                         return Request.Builder()
                             .url("${APIConfig.urlAPI}$url")
+                            .header("apikey", "123456789")
                             .addHeader("Authorization", "Bearer $auth")
                             .post(jsonToRequestBody(jsonObject))
                             .build()
@@ -153,12 +154,14 @@ class APIUtils {
                     if (auth == null)
                         return Request.Builder()
                             .url("${APIConfig.urlAPI}$url")
+                            .header("apikey", "123456789")
                             .header("Content-Type", "application/x-www-form-urlencoded")
                             .post(jsonToFormRequestBody(jsonObject))
                             .build()
                     else
                         return Request.Builder()
                             .url("${APIConfig.urlAPI}$url")
+                            .header("apikey", "123456789")
                             .header("Content-Type", "application/x-www-form-urlencoded")
                             .addHeader("Authorization", "Bearer $auth")
                             .post(jsonToFormRequestBody(jsonObject))
@@ -174,12 +177,14 @@ class APIUtils {
                 Request.Builder()
                     .url("${APIConfig.urlAPI}$url")
                     .addHeader("Authorization", "Bearer $auth")
+                    .header("apikey", "123456789")
                     .addHeader("charset", "utf-8")
                     .get()
                     .build()
             else
                 Request.Builder()
                     .url("${APIConfig.urlAPI}$url")
+                    .header("apikey", "123456789")
                     .addHeader("charset", "utf-8")
                     .get()
                     .build()
@@ -188,6 +193,7 @@ class APIUtils {
             Request.Builder()
                 .url("${APIConfig.urlAPI}$url")
                 .addHeader("Authorization", "Bearer $auth")
+                .header("apikey", "123456789")
                 .addHeader("charset", "utf-8")
                 .delete()
                 .build()
@@ -195,6 +201,7 @@ class APIUtils {
         private fun preparePutRequest(url: String, jsonObject: JSONObject, auth: String) =
             Request.Builder()
                 .url("${APIConfig.urlAPI}$url")
+                .header("apikey", "123456789")
                 .addHeader("Authorization", "Bearer $auth")
                 .put(jsonToRequestBody(jsonObject))
                 .build()

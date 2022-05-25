@@ -7,6 +7,7 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 import su.usatu.navigator.databinding.ActivityMainBinding
 
@@ -16,6 +17,27 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen().apply {
+            setOnExitAnimationListener { viewProvider ->
+                viewProvider.view
+                    .animate()
+                    .setDuration(300L)
+                    .alpha(0f)
+                    .withEndAction {
+                        viewProvider.remove()
+                    }
+                    .start()
+
+                viewProvider.iconView
+                    .animate()
+                    .setDuration(200L)
+                    .alpha(0f)
+                    .scaleX(0.75f)
+                    .scaleY(0.75f)
+                    .start()
+            }
+        }
+
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             window.decorView.systemUiVisibility =
                 window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION

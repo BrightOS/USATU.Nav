@@ -16,6 +16,7 @@ import su.usatu.navigator.data.repository.HistoryRepository
 import su.usatu.navigator.data.repository.PointsRepository
 import su.usatu.navigator.models.PointModel
 import su.usatu.navigator.models.QueryModel
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,12 +37,10 @@ class MainViewModel @Inject constructor(
     val pointsList: LiveData<List<PointModel>>
         get() = _pointsList
 
-    private val _navigationPointsList = MutableLiveData(listOf<PointModel>())
-    val navigationPointsList: LiveData<List<PointModel>>
-        get() = _navigationPointsList
+    val navigationPointsList: MutableLiveData<List<PointModel>> = MutableLiveData(listOf())
 
     fun clearNavigation() {
-        _navigationPointsList.value = listOf()
+        navigationPointsList.value = listOf()
     }
 
     val pointFrom = MutableLiveData(PointModel(0, "", false, ""))
@@ -74,7 +73,8 @@ class MainViewModel @Inject constructor(
                 historyRepository.addQuery(
                     QueryModel(
                         from = from,
-                        to = to
+                        to = to,
+                        pointsList = navigationPointsList.value.orEmpty()
                     )
                 )
             )
@@ -82,8 +82,6 @@ class MainViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .subscribeBy(onError = {
                 it.printStackTrace()
-            }, onNext = {
-                println("kek")
             })
             .addTo(compositeDisposable)
     }
@@ -97,7 +95,6 @@ class MainViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                println(it.size)
                 _history.value = it
             }
             .addTo(compositeDisposable)
@@ -128,13 +125,14 @@ class MainViewModel @Inject constructor(
                 subscriber.onNext(USATUNavigatorAPI.getAllPoints())
             }
                 .subscribeOn(Schedulers.io())
+                .delay(200, TimeUnit.MILLISECONDS)
                 .concatMap {
                     pointsRepository.addPoints(it)
                     Observable.just(false)
                 }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(onError = {
-                    _isLoading.value = true
+                    _isLoading.value = false
                 }, onNext = {
                     _isLoading.value = it
                 })
@@ -157,7 +155,7 @@ class MainViewModel @Inject constructor(
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
-                _navigationPointsList.value = it
+                navigationPointsList.value = it
                 _isLoading.value = false
             }, onError = {
                 it.printStackTrace()

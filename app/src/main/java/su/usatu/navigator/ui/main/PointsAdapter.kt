@@ -43,12 +43,10 @@ class PointsAdapter(
 
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             return if (constraint != null) {
-                println("${constraint.length}")
                 suggestions.clear()
                 tempList.forEach {
                     if (it.title.contains(constraint.toString(), false) || constraint.length < 1)
                         suggestions.add(it)
-//                    println("$constraint ${it.title}")
                 }
                 val filterResults = FilterResults()
                 filterResults.values = suggestions

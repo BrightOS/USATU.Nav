@@ -22,6 +22,9 @@ interface PointDao {
     @Delete
     fun deletePoint(item: PointEntity)
 
+    @Query("DELETE FROM points_table")
+    fun deleteAllPoints()
+
     @Query("SELECT COUNT(*) FROM points_table")
     fun getPointsSize(): LiveData<Int>
 }

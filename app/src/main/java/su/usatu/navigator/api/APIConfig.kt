@@ -2,8 +2,8 @@ package ru.followy.util.followy_extensions.api
 
 class APIConfig {
     companion object {
-        private const val connectionType = "http"
-        private const val domain = "31.172.67.167"
+        private const val connectionType = "https"
+        private const val domain = "usatunavigator.ru"
         const val getAllPointsDirectory = "points.simple"
         const val findWayDirectory = "points.find_ways"
         const val goodResponseCode = 200

@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">USATU.Nav</string>
+    <string name="app_name">Навигатор УГАТУ</string>
+    <string name="from">Откуда</string>
+    <string name="to">Куда</string>
+    <string name="build_a_route">Построить маршрут</string>
+    <string name="search_history">История поиска</string>
+    <string name="_404" translatable="false">404</string>
+    <string name="history_is_empty">История поиска пуста :(</string>
+    <string name="swipe_guide">Чтобы переходить между шагами, надо делать свайпы слева направо или справа налево. Плитки внизу экрана показывают начальную и конечную точки маршрута.</string>
+    <string name="cache_cleared">Кэш изображений успешно очищен.</string>
+    <string name="made_with_love"><![CDATA[Сделано с любовью для УГАТУ <3]]></string>
+    <string name="no_such_points">Таких точек не существует.</string>
+    <string name="no_such_start_point">Такой отправной точки не существует.</string>
+    <string name="no_such_end_point">Такой точки прибытия не существует.</string>
+    <string name="swipe_gif_url" translatable="false">https://i.imgur.com/H17Su5l.gif</string>
+    <string name="step">Шаг</string>
+    <string name="of_steps">из</string>
+    <string name="points_are_equal">Точки совпадают.</string>
 </resources>
