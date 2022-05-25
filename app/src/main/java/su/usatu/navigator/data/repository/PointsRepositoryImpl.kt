@@ -53,6 +53,7 @@ class PointsRepositoryImpl @Inject constructor(private val dao: PointDao) : Poin
                 )
             )
         }
+        dao.deleteAllPoints()
         dao.addPoints(pointsEntities)
     }
 

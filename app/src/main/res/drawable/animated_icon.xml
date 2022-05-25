@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_usatu_nav_full_rounded">
+
+    <target
+        android:name="mainGroup"
+        android:animation="@animator/fade_in" />
+
+    <target
+        android:name="bottomGroup"
+        android:animation="@animator/bottom_animation" />
+</animated-vector>

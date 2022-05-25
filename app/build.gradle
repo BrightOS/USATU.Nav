@@ -13,16 +13,27 @@ android {
         applicationId "su.usatu.navigator"
         minSdk 23
         targetSdk 32
-        versionCode 3
-        versionName "0.1.2"
+        versionCode 6
+        versionName "0.3.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        garbage_key {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('debug.keystore')
+            storePassword 'android'
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.garbage_key
         }
     }
 
@@ -54,6 +65,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "androidx.core:core-ktx:$coreKtxVersion"
+    implementation "androidx.core:core-splashscreen:$splashScreenVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     implementation "androidx.room:room-runtime:$roomVersion"
@@ -61,9 +73,12 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$roomVersion"
     implementation "com.airbnb.android:epoxy:$epoxyVersion"
     implementation "com.facebook.shimmer:shimmer:$shimmerVersion"
+    implementation 'com.factor:bouncy:1.61'
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "com.google.dagger:hilt-android:$hiltVersion"
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation "com.jsibbold:zoomage:$zoomageVersion"
     implementation "com.squareup.okhttp3:okhttp:$okHttp3Version"
     implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"

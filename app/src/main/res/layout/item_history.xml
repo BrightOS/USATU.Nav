@@ -36,9 +36,7 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp"
             android:backgroundTint="?colorPrimaryDark"
-            android:clickable="true"
             android:elevation="0dp"
-            android:focusable="true"
             app:cardCornerRadius="15dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -55,9 +53,8 @@
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="15dp"
-                android:fontFamily="@font/bwsurco_medium"
+                android:fontFamily="@font/inter_regular"
                 android:gravity="center"
-                android:text="6-201"
                 android:textColor="?colorAccent" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -69,9 +66,7 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp"
             android:backgroundTint="?colorPrimaryDark"
-            android:clickable="true"
             android:elevation="0dp"
-            android:focusable="true"
             app:cardCornerRadius="15dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -88,9 +83,8 @@
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="15dp"
-                android:fontFamily="@font/bwsurco_medium"
+                android:fontFamily="@font/inter_regular"
                 android:gravity="center"
-                android:text="Столовая 2 корпуса"
                 android:textColor="?colorAccent" />
 
         </com.google.android.material.card.MaterialCardView>

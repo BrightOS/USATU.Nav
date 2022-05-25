@@ -3,14 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/USATUNav/app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.217" />
+        <entry key="..\:/USATUNav/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.316" />
         <entry key="..\:/USATUNav/app/src/main/res/drawable-v24/popup_menu_background.xml" value="0.217" />
+        <entry key="..\:/USATUNav/app/src/main/res/drawable/animated_icon.xml" value="0.176" />
         <entry key="..\:/USATUNav/app/src/main/res/drawable/black_transparent_gradient.xml" value="0.283" />
         <entry key="..\:/USATUNav/app/src/main/res/drawable/bottom_sheet_holder.xml" value="0.272" />
         <entry key="..\:/USATUNav/app/src/main/res/drawable/gradient.xml" value="0.272" />
         <entry key="..\:/USATUNav/app/src/main/res/drawable/ic_arrow_left.xml" value="0.272" />
         <entry key="..\:/USATUNav/app/src/main/res/drawable/ic_cloud_off.xml" value="0.2575" />
+        <entry key="..\:/USATUNav/app/src/main/res/drawable/ic_delete.xml" value="0.1795" />
         <entry key="..\:/USATUNav/app/src/main/res/drawable/ic_help.xml" value="0.283" />
+        <entry key="..\:/USATUNav/app/src/main/res/drawable/ic_history.xml" value="0.217" />
+        <entry key="..\:/USATUNav/app/src/main/res/drawable/ic_launcher_background.xml" value="0.316" />
+        <entry key="..\:/USATUNav/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.217" />
+        <entry key="..\:/USATUNav/app/src/main/res/drawable/ic_logo.xml" value="0.217" />
+        <entry key="..\:/USATUNav/app/src/main/res/drawable/ic_refresh.xml" value="0.217" />
         <entry key="..\:/USATUNav/app/src/main/res/drawable/ic_usatu.xml" value="0.272" />
+        <entry key="..\:/USATUNav/app/src/main/res/drawable/ic_usatu_nav_full_rounded.xml" value="0.316" />
         <entry key="..\:/USATUNav/app/src/main/res/drawable/ic_usatu_v_rus_2.xml" value="0.272" />
         <entry key="..\:/USATUNav/app/src/main/res/drawable/splash.xml" value="0.272" />
         <entry key="..\:/USATUNav/app/src/main/res/layout/activity_main.xml" value="0.3188405797101449" />
@@ -23,6 +33,7 @@
         <entry key="..\:/USATUNav/app/src/main/res/layout/layout_followy_appbar.xml" value="0.3188405797101449" />
         <entry key="..\:/USATUNav/app/src/main/res/layout/layout_internet_error.xml" value="0.36666666666666664" />
         <entry key="..\:/USATUNav/app/src/main/res/menu/popup_menu.xml" value="0.33" />
+        <entry key="..\:/USATUNav/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.316" />
       </map>
     </option>
   </component>

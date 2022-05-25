@@ -12,15 +12,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.TransitionManager
+import com.bumptech.glide.Glide
 import com.google.android.material.transition.MaterialSharedAxis
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import su.usatu.navigator.R
-import su.usatu.navigator.data.PreferenceRepository
+import su.usatu.navigator.data.repository.PreferenceRepository
 import su.usatu.navigator.databinding.FragmentMainBinding
 import su.usatu.navigator.epoxy.history
 import su.usatu.navigator.models.QueryModel
 import su.usatu.navigator.ui.MainActivity
+import su.usatu.navigator.util.getCurrentDate
 import javax.inject.Inject
 
 
@@ -53,6 +59,12 @@ class MainFragment : Fragment() {
 
         mainViewModel.isLoading.observe(viewLifecycleOwner) {
             (activity as MainActivity).hideKeyboard()
+
+            val sharedAxis = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+            binding.root.let {
+                TransitionManager.beginDelayedTransition(it, sharedAxis)
+            }
+
             if (it)
                 binding.loading.visibility = View.VISIBLE
             else
@@ -75,10 +87,7 @@ class MainFragment : Fragment() {
                                 override fun onHistoryClick(item: QueryModel, position: Long) {
                                     from = item.from
                                     to = item.to
-                                    mainViewModel.loadNavigationPointsList(
-                                        from,
-                                        to
-                                    )
+                                    mainViewModel.navigationPointsList.postValue(item.pointsList)
                                 }
                             })
                             from(queryModel.from)
@@ -93,10 +102,12 @@ class MainFragment : Fragment() {
         }
 
         mainViewModel.pointsCount.observe(viewLifecycleOwner) {
-            if (it > 0)
-                mainViewModel.loadPointsFromCache()
-            else
+            val currentDate = getCurrentDate()
+            if (preferenceRepository.lastDate != currentDate) {
                 mainViewModel.updatePointsList()
+                preferenceRepository.lastDate = currentDate
+            } else
+                mainViewModel.loadPointsFromCache()
         }
 
         mainViewModel.pointsList.observe(viewLifecycleOwner) { newPointsList ->
@@ -134,6 +145,27 @@ class MainFragment : Fragment() {
                                 mainViewModel.updatePointsList()
                                 true
                             }
+                            R.id.clear_cache -> {
+                                Observable.create<() -> Unit> { subscriber ->
+                                    subscriber.onNext {
+                                        Glide.get(requireContext())
+                                            .clearDiskCache()
+                                    }
+                                }
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe {
+                                        Glide.get(requireContext())
+                                            .clearMemory()
+
+                                        Toast.makeText(
+                                            context,
+                                            R.string.cache_cleared,
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                true
+                            }
                             else ->
                                 false
                         }
@@ -144,7 +176,7 @@ class MainFragment : Fragment() {
             }
 
             binding.ndaAppbar.setStartButtonOnClickListener {
-                Toast.makeText(context, "Сделано с любовью для УГАТУ <3", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.made_with_love, Toast.LENGTH_SHORT).show()
             }
 
             binding.searchButton.setOnClickListener {
@@ -158,7 +190,7 @@ class MainFragment : Fragment() {
                     if (!fromInTitlesList && !toInTitlesList) {
                         Toast.makeText(
                             context,
-                            "Таких точек не существует.",
+                            R.string.no_such_points,
                             Toast.LENGTH_SHORT
                         ).show()
                         return@setOnClickListener
@@ -167,7 +199,7 @@ class MainFragment : Fragment() {
                     if (!fromInTitlesList) {
                         Toast.makeText(
                             context,
-                            "Такой отправной точки не существует.",
+                            R.string.no_such_start_point,
                             Toast.LENGTH_SHORT
                         ).show()
                         return@setOnClickListener
@@ -176,7 +208,16 @@ class MainFragment : Fragment() {
                     if (!toInTitlesList) {
                         Toast.makeText(
                             context,
-                            "Такой точки прибытия не существует.",
+                            R.string.no_such_end_point,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return@setOnClickListener
+                    }
+
+                    if (from.equals(to)) {
+                        Toast.makeText(
+                            context,
+                            R.string.points_are_equal,
                             Toast.LENGTH_SHORT
                         ).show()
                         return@setOnClickListener

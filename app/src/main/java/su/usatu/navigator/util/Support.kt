@@ -7,6 +7,9 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatTextView
 import java.lang.reflect.Field
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 @ColorInt
@@ -53,4 +56,10 @@ fun getNavigationBarHeight(resources: Resources): Int {
         result = resources.getDimensionPixelSize(resourceId)
     }
     return result
+}
+
+fun getCurrentDate(): String {
+    val simpleDateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale("ru"))
+    val date = Date()
+    return simpleDateFormat.format(date)
 }

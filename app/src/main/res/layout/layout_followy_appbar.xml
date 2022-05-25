@@ -47,7 +47,7 @@
                     android:ellipsize="marquee"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    android:fontFamily="@font/bwsurco_medium"
+                    android:fontFamily="@font/manrope_bold"
                     android:gravity="center"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:maxLines="1"

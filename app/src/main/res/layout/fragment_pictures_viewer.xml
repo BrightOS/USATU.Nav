@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -38,6 +38,7 @@
             android:id="@+id/left_click"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/right_click"
             app:layout_constraintHorizontal_weight="1"
@@ -48,6 +49,7 @@
             android:id="@+id/right_click"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="2"
@@ -66,11 +68,23 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@android:color/white" />
 
+        <ImageView
+            android:id="@+id/help"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="20dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="5dp"
+            android:src="@drawable/ic_help"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@android:color/white" />
+
         <TextView
             android:id="@+id/stage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/bwsurco_medium"
+            android:fontFamily="@font/inter_regular"
             android:text="Шаг 1 из 69"
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -116,9 +130,8 @@
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="15dp"
-                android:fontFamily="@font/bwsurco_medium"
+                android:fontFamily="@font/inter_regular"
                 android:gravity="center"
-                android:text="6-201"
                 android:textColor="?colorAccent" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -148,12 +161,47 @@
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="15dp"
-                android:fontFamily="@font/bwsurco_medium"
+                android:fontFamily="@font/inter_regular"
                 android:gravity="center"
-                android:text="Столовая 2 корпуса"
                 android:textColor="?colorAccent" />
 
         </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/swipe_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#55000000"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/swipe_gif"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_refresh"
+            app:layout_constraintBottom_toTopOf="@id/swipe_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:tint="@android:color/white" />
+
+        <TextView
+            android:id="@+id/swipe_hint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/inter_regular"
+            android:gravity="center"
+            android:text="@string/swipe_guide"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/swipe_gif" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

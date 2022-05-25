@@ -7,7 +7,7 @@ import dagger.Reusable
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import su.usatu.navigator.data.PreferenceRepository
+import su.usatu.navigator.data.repository.PreferenceRepository
 
 @Module
 @InstallIn(SingletonComponent::class)

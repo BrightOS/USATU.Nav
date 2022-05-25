@@ -15,7 +15,8 @@ class HistoryRepositoryImpl @Inject constructor(private val dao: HistoryDao) : H
             queryModels.add(
                 QueryModel(
                     from = it.from,
-                    to = it.to
+                    to = it.to,
+                    pointsList = it.pointsList
                 )
             )
         }
@@ -25,12 +26,14 @@ class HistoryRepositoryImpl @Inject constructor(private val dao: HistoryDao) : H
 
     override fun addQuery(item: QueryModel) {
         item.let {
-            dao.addQuery(
-                QueryEntity(
-                    from = it.from,
-                    to = it.to
+            if (it.pointsList.size > 0)
+                dao.addQuery(
+                    QueryEntity(
+                        from = it.from,
+                        to = it.to,
+                        pointsList = it.pointsList
+                    )
                 )
-            )
         }
     }
 

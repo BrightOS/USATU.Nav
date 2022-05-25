@@ -53,10 +53,8 @@ open class FollowyExtendedBottomSheetFragment :
 
     override fun onStart() {
         super.onStart()
-        println("FUUUUUUUUUUUUUUUUUUUUUUUCK")
         if (dialog != null && dialog!!.window != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val window: Window? = dialog!!.window
-            println("FUUUUUUUUUUUUUUCK")
             window?.findViewById<View>(com.google.android.material.R.id.container)?.fitsSystemWindows =
                 false
             // dark navigation bar icons
